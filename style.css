@@ -29,3 +29,8 @@ body {
     padding: 15px 30px;
     cursor: pointer;
 }
+
+.play-btn:active {
+    background-color: #3e8e41;
+    transform: translateY(4px);
+}
