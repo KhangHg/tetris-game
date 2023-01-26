@@ -183,6 +183,7 @@ const KEY_CODES = {
     RIGHT: 'ArrowRight',
     UP: 'ArrowUp',
     DOWN: 'ArrowDown',
+    SPACE: 'Space',
 };
 
 const canvas = document.getElementById('board');
@@ -386,6 +387,9 @@ document.addEventListener('keydown', (e) => {
                 break;
             case KEY_CODES.DOWN:
                 brick.moveDown();
+                break;
+            case KEY_CODES.SPACE:
+                brick.rotate();
                 break;
             case KEY_CODES.UP:
                 brick.rotate();
