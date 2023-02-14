@@ -242,7 +242,35 @@ class Board {
     handleGameOver() {
         this.gameOver = true;
         this.isPlaying = false;
-        alert('Game over!!!');
+        // alert('Game over!!!');
+        // var canvas = document.getElementById("gameCanvas");
+        var ctx = canvas.getContext("2d");
+
+        // Draw the game over message on the canvas
+        ctx.fillStyle = "red";
+        ctx.font = "bold 36px Arial";
+        ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+
+        // Create the pop-up canvas
+        var popup = document.createElement("div");
+        popup.style.backgroundColor = "white";
+        popup.style.position = "fixed";
+        popup.style.left = "50%";
+        popup.style.top = "50%";
+        popup.style.transform = "translate(-50%, -50%)";
+        popup.style.width = "400px";
+        popup.style.height = "200px";
+        popup.style.border = "2px solid black";
+
+        // Add the game over message to the pop-up canvas
+        var message = document.createElement("p");
+        message.style.textAlign = "center";
+        message.style.fontSize = "36px";
+        message.innerHTML = "Game Over";
+        popup.appendChild(message);
+
+        // Show the pop-up canvas when the game is over
+        document.body.appendChild(popup);
     }
 
     reset() {
