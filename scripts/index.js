@@ -192,6 +192,54 @@ const ctx = canvas.getContext('2d');
 ctx.canvas.width = COLS * BLOCK_SIZE;
 ctx.canvas.height = ROWS * BLOCK_SIZE;
 
+// create a canvas element
+var canvasGameOver = document.createElement("canvasGameOver");
+canvasGameOver.width = 500;
+canvasGameOver.height = 500;
+document.body.appendChild(canvasGameOver);
+
+// get canvasGameOver context
+var ctxGameOver = canvas.getContext("2d");
+
+// create game over function
+function gameOverPop() {
+    // clear canvasGameOver
+    ctxGameOver.clearRect(0, 0, canvasGameOver.width, canvasGameOver.height);
+
+    // fill canvasGameOver with a semi-transparent black background
+    ctxGameOver.fillStyle = "rgba(0, 0, 0, 0.5)";
+    ctxGameOver.fillRect(0, 0, canvasGameOver.width, canvasGameOver.height);
+
+    // write "Game Over" text
+    ctxGameOver.font = "48px sans-serif";
+    ctxGameOver.fillStyle = "white";
+    ctxGameOver.textAlign = "center";
+    ctxGameOver.fillText("Game Over", canvasGameOver.width / 2, canvasGameOver.height / 2);
+
+    // create "Play Again" button
+    var button = document.createElement("button");
+    button.innerHTML = "Play Again";
+    button.style.position = "absolute";
+    button.style.left = "50%";
+    button.style.top = "50%";
+    button.style.transform = "translate(-50%, -50%)";
+    button.addEventListener("click", playAgain);
+    document.body.appendChild(button);
+}
+
+// create playAgain function
+function playAgain() {
+    // remove "Play Again" button
+    document.body.removeChild(button);
+
+    // start the game again
+    // ...
+}
+
+// call gameOver function when game is over
+// gameOver();
+
+
 class Board {
     constructor(ctx) {
         this.ctx = ctx;
@@ -242,35 +290,7 @@ class Board {
     handleGameOver() {
         this.gameOver = true;
         this.isPlaying = false;
-        // alert('Game over!!!');
-        // var canvas = document.getElementById("gameCanvas");
-        var ctx = canvas.getContext("2d");
-
-        // Draw the game over message on the canvas
-        ctx.fillStyle = "red";
-        ctx.font = "bold 36px Arial";
-        ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
-
-        // Create the pop-up canvas
-        var popup = document.createElement("div");
-        popup.style.backgroundColor = "white";
-        popup.style.position = "fixed";
-        popup.style.left = "50%";
-        popup.style.top = "50%";
-        popup.style.transform = "translate(-50%, -50%)";
-        popup.style.width = "400px";
-        popup.style.height = "200px";
-        popup.style.border = "2px solid black";
-
-        // Add the game over message to the pop-up canvas
-        var message = document.createElement("p");
-        message.style.textAlign = "center";
-        message.style.fontSize = "36px";
-        message.innerHTML = "Game Over";
-        popup.appendChild(message);
-
-        // Show the pop-up canvas when the game is over
-        document.body.appendChild(popup);
+        gameOverPop();
     }
 
     reset() {
