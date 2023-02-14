@@ -269,8 +269,26 @@ class Board {
         message.innerHTML = "Game Over";
         popup.appendChild(message);
 
+        // Create the "Play Again" button
+        var playAgainButton = document.createElement("button");
+        playAgainButton.style.backgroundColor = "green";
+        playAgainButton.style.color = "white";
+        playAgainButton.style.width = "100px";
+        playAgainButton.style.height = "50px";
+        playAgainButton.style.margin = "0 auto";
+        playAgainButton.style.display = "block";
+        playAgainButton.style.marginTop = "50px";
+        playAgainButton.innerHTML = "Play Again";
+        popup.appendChild(playAgainButton);
+        playAgainButton.addEventListener("click", () => {
+            // Write your code here to restart the game
+            document.body.removeChild(popup);
+            btnPlayAgain();
+        });
+
         // Show the pop-up canvas when the game is over
         document.body.appendChild(popup);
+
     }
 
     reset() {
@@ -279,7 +297,9 @@ class Board {
         this.gameOver = false;
         this.drawBoard();
     }
+
 }
+
 
 class Brick {
     constructor(id) {
@@ -399,6 +419,13 @@ document.getElementById("play").addEventListener('click', () => {
         }
     }, 1000);
 })
+
+function btnPlayAgain() {
+    board.reset();
+    board.score = 0;
+    board.handleScore(0);
+    console.log(board.score);
+}
 
 
 
